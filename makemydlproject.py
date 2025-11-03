@@ -20,6 +20,9 @@ Git:
     5. Add remote URL: git remote add origin <remote_repository_URL>
     6. Connect to remote repository and push: git push -u origin main (or master based on your default branch)
 
+If .gitkeep is not created use the following in terminal: 
+find . -type d -empty -not -path "./.git/*" -exec touch {}/.gitkeep \;
+
 Author: Deepak Subramani, Oct 2025
 AI-assistant: Claude 4.5
 Directory Structure Inspired by: https://gist.github.com/Nivratti/ea81e952e07ffbbf03e6d44a7dbbef8f 
@@ -211,7 +214,12 @@ def create_directory_structure(project_name="my_dl_project"):
         for directory in directories:
             dir_path = project_path / directory
             dir_path.mkdir(parents=True, exist_ok=True)
+            gitkeep_path = os.path.join(path, '.gitkeep')
+            with open(gitkeep_path, 'w') as f:
+                pass  # Create empty file
         print(f"Created {len(directories)} directories")
+
+        # Add .gitkeep to track empty directories
         
         # Create files with content
         print("\nCreating configuration files...")
